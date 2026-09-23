@@ -31,10 +31,19 @@ image: "/images/my-cover.png" # optional — 16:9 card thumbnail, hero image, an
   Useful note text.
 </Callout>
 
-![Caption shown under the figure](/images/my-figure.svg)
+![Caption shown under the figure](/images/my-post-slug/my-figure.svg)
 
-<Image src="/images/photo.png" alt="Part" width={1600} height={900} />
+<Image
+  src="/images/my-post-slug/photo.png"
+  alt="Part"
+  width={1600}
+  height={900}
+/>
 ```
+
+Keep each post's images in `public/images/<post-slug>/` (same name as
+the `.mdx` file) so assets stay organized as the blog grows. Shared
+assets like placeholders can stay at the `public/images/` root.
 
 Code fences (`python, `typescript, etc.) get syntax highlighting and a
 copy button automatically.

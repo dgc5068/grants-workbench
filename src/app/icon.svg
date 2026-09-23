@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect x="2" y="2" width="60" height="60" fill="#0b0b0a" stroke="#7ba1f8" stroke-width="3"/>
+  <path d="M8 8 L56 56 M56 8 L8 56" stroke="#7ba1f8" stroke-width="1.5" opacity="0.45"/>
+  <text x="32" y="41" font-family="ui-monospace, monospace" font-size="24" font-weight="700" fill="#e6e6e3" text-anchor="middle">GW</text>
+</svg>

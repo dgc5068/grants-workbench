@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# grant's workbench
 
-## Getting Started
+A personal engineering blog built with Next.js (App Router), TypeScript,
+Tailwind CSS, and MDX. Styled like an engineering drawing — minimalist,
+monospace labels, hairline borders.
 
-First, run the development server:
+## Writing a post (no coding required)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. Create a new file in `content/posts/` named `my-post-slug.mdx`
+   (the filename becomes the URL: `/blog/my-post-slug`).
+2. Paste this frontmatter at the top and fill it in:
+
+```yaml
+---
+title: "My Post Title"
+publishedAt: "2026-09-23" # YYYY-MM-DD
+summary: "One or two sentences shown in the archive and RSS feed."
+tags: ["machining", "cad"]
+draft: false # true = hidden from production builds
+image: "/images/my-cover.png" # optional — 16:9 card thumbnail, hero image, and social card
+---
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Write the post in Markdown below the frontmatter. Extra components
+   available inside posts:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```mdx
+<Callout type="info">
+  {" "}
+  {/* also: "warning", "tip" */}
+  Useful note text.
+</Callout>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+![Caption shown under the figure](/images/my-figure.svg)
 
-## Learn More
+<Image src="/images/photo.png" alt="Part" width={1600} height={900} />
+```
 
-To learn more about Next.js, take a look at the following resources:
+Code fences (`python, `typescript, etc.) get syntax highlighting and a
+copy button automatically.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Save the file and restart/redeploy — the post appears on `/blog`, the
+   homepage, the sitemap, and the RSS feed.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Local development
 
-## Deploy on Vercel
+```bash
+npm install
+npm run dev    # http://localhost:3000
+npm run build  # production build + typecheck
+npm run lint
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Comments (Giscus)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Comments are powered by [Giscus](https://giscus.app) (GitHub Discussions —
+no separate comment database or login for readers beyond a GitHub account).
+Until configured, an informational banner is shown under each post.
+
+1. Make the site's GitHub repo public and enable **Discussions** on it.
+2. Install the Giscus app: <https://github.com/apps/giscus>
+3. Copy `.env.example` to `.env.local` and fill in the four
+   `NEXT_PUBLIC_GISCUS_*` values from the giscus.app configurator.
+
+## Configuration
+
+Edit `src/lib/site.ts` to change the site name, description, email, and
+social links. Set `NEXT_PUBLIC_SITE_URL` to your deployed domain so the
+sitemap, RSS feed, and OpenGraph tags emit correct URLs.

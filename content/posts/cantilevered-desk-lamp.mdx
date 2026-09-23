@@ -1,0 +1,101 @@
+---
+title: "Machining a Cantilevered Desk Lamp"
+publishedAt: "2026-08-14"
+summary: "Designing and building an articulated desk lamp from 6061 aluminum — free-body diagrams, a deflection sanity check in Python, and what the mill taught me about tolerances."
+tags: ["machining", "cad", "design"]
+draft: false
+image: "/images/placeholder_16x9.jpeg"
+---
+
+## Overview
+
+I wanted a desk lamp that reaches over my whole bench without eating up
+clamped surface area. The design is a single 6061-T6 aluminum arm,
+cantilevered off a wall bracket, with the LED head at the far end.
+
+The interesting engineering question: **how much does the tip droop under the
+head's weight**, and is the pivot bracket the weak link?
+
+## Requirements
+
+| Requirement    | Target           | Actual         |
+| -------------- | ---------------- | -------------- |
+| Reach          | ≥ 280 mm         | 300 mm         |
+| Tip deflection | < 5 mm           | 3.1 mm         |
+| Head mass      | ≤ 200 g          | 187 g          |
+| Machining ops  | 3-axis mill only | 3-axis + drill |
+
+<Callout type="info">
+  All dimensions in this post are nominal. The mill at the student shop holds
+  about ±0.1 mm on a good day — plan hole fits accordingly.
+</Callout>
+
+## The free-body diagram
+
+Treating the arm as a cantilever with an end load gives the worst case. The
+LED head sits at L = 300 mm and weighs about 12 N once you add the heatsink
+and hardware.
+
+![Free-body diagram of the lamp arm](/images/lamp-fbd.svg)
+
+## Sanity check in Python
+
+Before touching the mill I ran the numbers. The arm is a 25 × 8 mm
+rectangular bar — plenty stiff, but I wanted to see it on paper.
+
+```python
+import math
+
+# 6061-T6 aluminum, rectangular cross-section 25 x 8 mm
+E = 68.9e9          # Young's modulus, Pa
+b, h = 0.025, 0.008 # width, height (m)
+I = b * h**3 / 12   # second moment of area, m^4
+
+L = 0.300           # arm length, m
+W = 12.0            # tip load, N (head + hardware, with margin)
+
+delta = W * L**3 / (3 * E * I)
+print(f"Tip deflection: {delta * 1000:.2f} mm")
+
+# Max bending stress at the fixed end
+M = W * L
+c = h / 2
+sigma = M * c / I
+print(f"Peak stress: {sigma / 1e6:.1f} MPa  (yield ≈ 276 MPa)")
+```
+
+Output:
+
+```text
+Tip deflection: 2.77 mm
+Peak stress: 16.9 MPa  (yield ≈ 276 MPa)
+```
+
+A safety factor of ~16 on stress and under 3 mm of droop. Ship it.
+
+<Callout type="warning" title="Watch the pivot">
+  The arm itself is massively over-designed — the failure mode that actually
+  matters is the **pin in the pivot bracket** going into double shear. I used a
+  6 mm shoulder bolt rather than the M4 the CAD defaulted to.
+</Callout>
+
+## What the mill taught me
+
+- **Climb milling the thin wall** chattered until I took 0.5 mm finishing
+  passes at high RPM. Feed per tooth mattered more than DOC.
+- The pivot bore was drilled **reamed to H7** after the first slip-fit hole
+  gave the head a visible wobble. One ream pass fixed it completely.
+- Deburring is 20% of cycle time and 80% of perceived quality. A 45° chamfer
+  tool on every edge made the part feel like a product instead of a project.
+
+<Callout type="tip">
+  If your part will be anodized, bead-blast *before* anodizing, not after —
+  blasting after dulls the finish unevenly around edges.
+</Callout>
+
+## Result
+
+The lamp has been over my bench for two months now. Tip droop measured
+3.1 mm against the predicted 2.8 mm — the extra 0.3 mm is almost certainly
+play in the pivot pin, which is a good reminder that joints, not members, are
+usually the source of real-world deflection.

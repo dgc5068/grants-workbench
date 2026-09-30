@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -78,7 +79,7 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
             </>
           )}
         </div>
-        <h1 className="mt-4 max-w-3xl text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+        <h1 className="mt-4 max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-black sm:text-4xl dark:text-foreground">
           {post.title}
         </h1>
         <p className="mt-4 max-w-2xl text-[15px] leading-7 text-zinc-600 dark:text-zinc-400">
@@ -100,6 +101,28 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
 
       <div className="mt-10 gap-12 lg:grid lg:grid-cols-[minmax(0,1fr)_220px]">
         <article className="prose max-w-none dark:prose-invert">
+          {post.image && (
+            <div className="not-prose mb-8 max-w-2xl border border-hairline bg-white p-2 dark:bg-[#111110]">
+              {post.image.endsWith(".svg") ? (
+                // next/image skips optimization for SVGs; render directly
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="h-auto w-full"
+                />
+              ) : (
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  width={1600}
+                  height={900}
+                  priority
+                  className="h-auto w-full"
+                />
+              )}
+            </div>
+          )}
           <MdxContent source={post.content} />
         </article>
         <aside className="mt-12 lg:mt-0">

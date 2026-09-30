@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ThemeToggle } from "./theme-toggle";
 import { site } from "@/lib/site";
@@ -10,9 +11,13 @@ export function Header() {
           <span className="flex h-7 w-7 items-center justify-center border border-foreground font-mono text-[11px] font-semibold tracking-tight transition-colors group-hover:border-accent group-hover:text-accent">
             GW
           </span>
-          <span className="font-mono text-sm font-medium tracking-tight">
-            {site.name}
-          </span>
+          <Image
+            src="/grants-workbench-logo.png"
+            alt={site.name}
+            width={2054}
+            height={292}
+            className="h-5 w-auto dark:invert"
+          />
         </Link>
         <nav className="flex items-center gap-1 sm:gap-2">
           <Link

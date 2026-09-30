@@ -1,0 +1,137 @@
+---
+title: "Current Project: Electric Self-Driving Airplane Tugs for F-117s (what?)"
+publishedAt: "2026-09-27"
+summary: "Somehow, I got invited to help build robotaxis for 100-ton airliners and supersonic jets and I'm not even under NDA."
+tags: ["radar", "lidar", "current projects"]
+draft: false
+image: "/images/etug-intro/etug-thumbnail.png"
+---
+
+I started this semester by emailing every professor in the mechanical
+engineering department asking for something to work on. Nothing came
+through at first, but a couple weeks later Dr. Jensen emailed me asking
+if I wanted to work on an autonomous electric airplane tug. I didn't
+have to think much about my response. Who says no to that?
+
+I'm now on a team of three working on the third major iteration of the
+"E-Tug," and this post is the intro. More write-ups coming as we
+actually build the thing.
+
+## The problem it's solving
+
+Airliners taxi on their jet engines, and that burns a ton of
+fuel. Something like 70-80 gallons just going from the jetway to the
+runway at airports like SLC. In 2019 alone, electric tugs could have
+saved airlines at Salt Lake City International about $2.17 million in
+fuel, plus the noise and emissions equivalent of taking 2,400+ cars off
+the road. It also gets tarmac workers away from live jet engines, which creates safer work environments.
+
+## Where the project came from
+
+The previous etug was a senior capstone project from 24-25. It was a proof of
+concept that displayed hands-free coupling and
+decoupling, remote control over a cellular datalink with a live video
+feed, and a redesigned drivetrain. It was demonstrated at the Provo
+Airport, won first place at the 2024 ACRP University Design Competition,
+and has patents pending.
+
+<Image
+  src="/images/etug-intro/tug2-demo.jpg"
+  alt="The old etug v2.0 pulling a Diamond DA20"
+  width={562}
+  height={316}
+/>
+
+<Image
+  src="/images/etug-intro/tug2-stripped.jpg"
+  alt="The old etug v2.0 ready for the dump after we ransacked it for parts. As you can see we managed to get the old F-22 mount on top with quite a struggle. You can tell by the brand new chip in the floor between the front tires."
+  width={1600}
+  height={900}
+/>
+
+<Image
+  src="/images/etug-intro/f-22-mount.jpg"
+  alt="The old mount from when the tug was pulling F-22s. This thing was like 600 lbs and not fun to move."
+  width={1600}
+  height={900}
+/>
+
+## What we're doing in v3
+
+My team is three people: Kaimen is in charge of sensors, Jesse is in
+charge of mechanical design, and I'm the bridge between the two since I
+study both mechanical and electrical engineering. Right now I'm in
+charge of integrating the LiDAR data and mounting all the LiDAR sensors
+to the machine.
+
+For v3 we're upgrading a remote-controlled tug prototype donated by
+Oshcut Aerospace into a fully autonomous one. The goal is a working
+prototype by spring to prove commercial viability for airliners. Our end
+goal is a building a complete fleet of tugs that park and back out airplanes at an airport with zero
+human intervention. They're kind of like Tesla cybercabs, but for planes (How cool is that? How did I get here?)
+
+<Image
+  src="/images/etug-intro/tug-front.jpg"
+  alt="The front view of the tug. We are working on installing the tire mount right now."
+  width={1600}
+  height={900}
+/>
+
+<Image
+  src="/images/etug-intro/tug-back.jpg"
+  alt="The back of the tug. As you can see, we are currently gutting all of the old electronics."
+  width={1600}
+  height={900}
+/>
+
+Current work on the mechanical side is the upgraded tire mount which is the
+piece that cradles the aircraft's nose wheel.
+
+<Image
+  src="/images/etug-intro/etug-wheel-mount.jpeg"
+  alt="The upgraded tire mount that we're working on installing"
+  width={4032}
+  height={3024}
+/>
+
+<Image
+  src="/images/etug-intro/etug-mount-3d-model.png"
+  alt="The 3D model of the new tire mount"
+  width={1368}
+  height={942}
+/>
+
+## The LiDAR (my favorite part)
+
+For the LiDAR we're using an LS CH32, a 32-line hybrid solid-state
+LiDAR as the proof-of-concept sensor. To summarize what that means, there's no big spinning barrel on top like the old autonomous
+car rigs. A small internal mirror steers the laser instead, so the whole
+unit is compact and solid. The "32-line" part means it sweeps 32
+horizontal beams at once, which gives you a dense point cloud
+instead of a flat laser scan.
+
+This sensor is way bigger and cooler than anything I've played with
+before, and I'll to be honest, I've really been nerding out about it. I used to
+own a Matterport Pro 2 that I took real estate scans with, and the CH32
+is on another level.
+
+<Image
+  src="/images/etug-intro/ls-lidar-distance-test.jpg"
+  alt="A distance test from the LS CH32 32-line hybrid solid-state LiDAR. Over 200m during the day! This is way better than my old 3D camera."
+  width={1920}
+  height={850}
+/>
+
+<Image
+  src="/images/etug-intro/ls-lidar-with-cars.jpg"
+  alt="A visual representation of a busy street from the CH32 mounted on a self-driving cab"
+  width={1971}
+  height={1175}
+/>
+
+## Why this project
+
+It combines my two big engineering interests mechatronics and
+airplanes in one machine. I've had a ton of fun so far and I can't
+wait to see where it is by spring. Who knows, maybe I'll end up an
+airplane tug designer someday.

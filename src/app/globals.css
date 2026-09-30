@@ -71,7 +71,7 @@ pre[data-language] code span {
 /* --- typography polish --- */
 .prose {
   --tw-prose-body: var(--foreground);
-  --tw-prose-headings: var(--foreground);
+  --tw-prose-headings: #000;
   --tw-prose-lead: var(--foreground);
   --tw-prose-links: var(--accent);
   --tw-prose-bold: var(--foreground);
@@ -96,6 +96,11 @@ pre[data-language] code span {
 
 .prose :where(h2, h3, h4) {
   scroll-margin-top: 6rem;
+}
+
+/* Autolinked headings should take the heading color, not the link accent */
+.prose :where(h1, h2, h3, h4) a {
+  color: inherit;
 }
 
 .prose :where(code):not(:where(pre code)) {

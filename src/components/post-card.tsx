@@ -93,7 +93,7 @@ export function FeaturedPostCard({ post }: { post: PostMeta }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group block border border-hairline bg-background transition-colors hover:border-accent"
+      className="group block border border-hairline bg-background shadow-[8px_8px_0_0_color-mix(in_srgb,var(--foreground)_18%,transparent)] transition-all duration-200 hover:-translate-y-1 hover:border-accent hover:shadow-[12px_12px_0_0_color-mix(in_srgb,var(--foreground)_22%,transparent)] dark:shadow-[8px_8px_0_0_rgba(0,0,0,0.55)] dark:hover:shadow-[12px_12px_0_0_rgba(0,0,0,0.65)]"
     >
       {post.image && (
         <span className="relative block aspect-video overflow-hidden border-b border-hairline bg-white dark:bg-[#111110]">

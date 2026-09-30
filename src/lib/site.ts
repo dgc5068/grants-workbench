@@ -7,6 +7,6 @@ export const site = {
   author: "Grant",
   email: "11048611@uvu.edu",
   links: {
-    linkedin: "https://www.linkedin.com/in/danny-clark-54480633a",
+    linkedin: "https://www.linkedin.com/in/grant-clark-54480633a",
   },
 } as const;

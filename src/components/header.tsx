@@ -30,10 +30,10 @@ export function Header() {
         </Link>
         <nav className="flex items-center gap-1 sm:gap-2">
           <Link
-            href="/"
+            href="/resume"
             className="px-2 py-1 font-mono text-[12px] uppercase tracking-[0.15em] text-zinc-600 transition-colors hover:text-accent dark:text-zinc-400"
           >
-            Work
+            Resume
           </Link>
           <Link
             href="/blog"

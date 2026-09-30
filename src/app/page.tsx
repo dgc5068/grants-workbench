@@ -1,5 +1,8 @@
+import fs from "node:fs";
+import path from "node:path";
 import Image from "next/image";
 import Link from "next/link";
+import { EmailButton } from "@/components/copy-email";
 import { getAllPosts } from "@/lib/mdx";
 import { FeaturedPostCard, PostCard, toPostMeta } from "@/components/post-card";
 import { site } from "@/lib/site";
@@ -8,6 +11,9 @@ export default function Home() {
   const posts = getAllPosts();
   const featured = posts[0] ? toPostMeta(posts[0]) : null;
   const recent = posts.slice(1, 5).map(toPostMeta);
+  const hasResumePdf = fs.existsSync(
+    path.join(process.cwd(), "public", "resume.pdf"),
+  );
 
   return (
     <div>
@@ -107,7 +113,6 @@ export default function Home() {
           <div className="mt-5 flex flex-wrap gap-3">
             {[
               ["LinkedIn", site.links.linkedin],
-              ["Email", `mailto:${site.email}`],
               ["RSS feed", "/feed.xml"],
             ].map(([label, href]) => (
               <a
@@ -121,6 +126,33 @@ export default function Home() {
                 {label} ↗
               </a>
             ))}
+            <EmailButton
+              email={site.email}
+              className="border border-hairline px-4 py-2 font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-600 transition-colors hover:border-accent hover:text-accent dark:text-zinc-400"
+            />
+            {hasResumePdf && (
+              <a
+                href="/resume.pdf"
+                download="Grant Clark — Resume.pdf"
+                className="inline-flex items-center gap-2 border border-hairline px-4 py-2 font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-600 transition-colors hover:border-accent hover:text-accent dark:text-zinc-400"
+              >
+                ATS-Friendly Resume PDF
+                <svg
+                  className="h-3.5 w-3.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+              </a>
+            )}
           </div>
         </div>
       </section>

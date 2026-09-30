@@ -7,9 +7,18 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-hairline bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-5">
-        <Link href="/" className="group flex items-center gap-2.5">
-          <span className="flex h-7 w-7 items-center justify-center border border-foreground font-mono text-[11px] font-semibold tracking-tight transition-colors group-hover:border-accent group-hover:text-accent">
-            GW
+        <Link
+          href="/"
+          className="flex origin-left items-center gap-2.5 transition-transform duration-200 hover:scale-110"
+        >
+          <span className="flex h-7 w-7 items-center justify-center overflow-hidden border border-foreground">
+            <Image
+              src="/gw-square-logo.png"
+              alt="GW"
+              width={171}
+              height={171}
+              className="h-full w-full object-contain dark:invert"
+            />
           </span>
           <Image
             src="/grants-workbench-logo.png"

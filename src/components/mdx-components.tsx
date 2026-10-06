@@ -58,8 +58,9 @@ function MdxImage({
   width,
   height,
   caption,
+  unoptimized,
   ...rest
-}: ComponentProps<"img"> & { caption?: string }) {
+}: ComponentProps<"img"> & { caption?: string; unoptimized?: boolean }) {
   const source = typeof src === "string" ? src : "";
   const w = Number(width) > 0 ? Number(width) : 1600;
   const h = Number(height) > 0 ? Number(height) : 900;
@@ -75,6 +76,7 @@ function MdxImage({
       alt={alt ?? ""}
       width={w}
       height={h}
+      unoptimized={unoptimized}
       className="h-auto w-full"
     />
   );
